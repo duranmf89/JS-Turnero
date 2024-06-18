@@ -1,2 +1,2 @@
-# JS-Canchita
+# JS-Turnero
 Curso Js en CoderHouse
