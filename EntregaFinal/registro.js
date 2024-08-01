@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectProvincia = document.getElementById('cont-provincias');
 
     form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Evita el envío tradicional del formulario
+        event.preventDefault(); // evita el envio del formulario para realizar las acciones que ponemos en la funcion
 
-        // Verifica si alguno de los campos está vacío
+        // Verificamos si alguno de los campos esta incompleto
         if (!nombre.value.trim() || !apellido.value.trim() || !dni.value.trim() || !correo.value.trim() || !selectProvincia.value) {
             Toastify({
-                text: "Por favor, complete todos los campos del formulario.",
+                text: "Complete todos los campos por favor.",
                 duration: 3000,
                 gravity: "top",
                 position: "center",
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 stopOnFocus: true,
             }).showToast();
         } else {
-            // Si todos los campos están completos
+            // Si estan los datos completos se abre mensaje de exito
             Toastify({
                 text: "Usuario registrado correctamente",
                 duration: 3000,
