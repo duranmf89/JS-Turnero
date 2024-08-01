@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 stopOnFocus: true,
             }).showToast();
 
-            // Opcional: Restablece el formulario después de la inscripción
+            // Reseteamos el formulario luego de apretar Enviar
             form.reset();
         }
     });
