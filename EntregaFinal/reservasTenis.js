@@ -59,7 +59,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+const cargarCanchasDB = () => {
+    return fetch('./data/canchas.json')
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Error al cargar canchas:', error);
+            return [];
+        });
+};
+
+const cargarPelotasDB = () => {
+    return fetch('./data/pelotas.json')
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Error al cargar las pelotas:', error);
+            return [];
+        });
+};
     
+
 // FUNCIONES
 // --------------------------------------------------------------------------------------- 
 const cargarCanchas = (canchas) => {
@@ -82,6 +100,7 @@ const cargarCanchas = (canchas) => {
         localStorage.setItem('cancha', selectCancha.value);
     });
 }
+
 
 // Función para obtener el precio de la cancha seleccionada (optimizada con Operadores avanzados)
 const obtenerPrecioSeleccionado = () => {
@@ -273,7 +292,7 @@ const removerProducto = (id) => {
 document.querySelector('.close').addEventListener('click', () => {
     document.getElementById('popupResumen').style.display = 'none';
     productosSeleccionados = []; // Resetea el array de productos seleccionados
-    comprarProductos(pelotas);
+    inicializarPelotas();
 });
 
 
@@ -282,6 +301,24 @@ document.querySelector('.close').addEventListener('click', () => {
 });
 
 
+const inicializarCanchas = () => {
+    cargarCanchasDB().then(canchas => {
+        cargarCanchas(canchas);
+    });
+}
+
+const inicializarPelotas = () => {
+    cargarPelotasDB().then(pelotas => {
+        comprarProductos(pelotas);
+    });
+}
+
 // Llamadas iniciales para que cargue las canchas y las pelotas en las funciones
-cargarCanchas(canchas);
-comprarProductos(pelotas);
+
+document.addEventListener('DOMContentLoaded', () => {
+    inicializarCanchas();
+    inicializarPelotas();
+});
+
+// cargarCanchas(canchas);
+// comprarProductos(pelotas);
