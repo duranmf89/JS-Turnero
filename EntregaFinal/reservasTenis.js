@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+// FETCH para las canchas y las pelotas
 const cargarCanchasDB = () => {
     return fetch('./data/canchas.json')
         .then(response => response.json())
@@ -300,7 +302,7 @@ document.querySelector('.close').addEventListener('click', () => {
     document.getElementById('popupResumen').style.display = 'none';
 });
 
-
+// Inicializadores de los fetch
 const inicializarCanchas = () => {
     cargarCanchasDB().then(canchas => {
         cargarCanchas(canchas);
@@ -322,3 +324,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // cargarCanchas(canchas);
 // comprarProductos(pelotas);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const fecha = localStorage.getItem('fecha');
+    const cancha = localStorage.getItem('cancha');
+    const horario = localStorage.getItem('horario');
+
+    if (fecha) {
+        document.getElementById('fecha').value = fecha;
+    }
+    if (cancha) {
+        document.getElementById('cancha').value = cancha;
+    }
+    if (horario) {
+        document.getElementById('horario').value = horario;
+    }
+});
+
+
+const confirmarReserva = () => {
+    const fecha = document.getElementById('fecha').value;
+    const selectCancha = document.getElementById('cancha');
+    const opcionCancha = selectCancha.options[selectCancha.selectedIndex].text;
+    const horario = document.getElementById('horario').value;
+
+    const reserva = {
+        fecha,
+        opcionCancha,
+        horario
+    };
+
+    let historialReservas = JSON.parse(localStorage.getItem('historialReservas')) || [];
+    historialReservas.push(reserva);
+    localStorage.setItem('historialReservas', JSON.stringify(historialReservas));
+
+    // Mensaje de exito
+    Toastify({
+        text: "Su reserva se ha realizado con éxito",
+        duration: 4000,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        backgroundColor: "green",
+    }).showToast();
+
+    resetReserva();
+};
+
+
+
+document.getElementById('reservar').addEventListener('click', confirmarReserva);
+
+
+const resetReserva = () => {
+    document.getElementById('fecha').value = '';
+    document.getElementById('cancha').selectedIndex = 0;
+    document.getElementById('horario').innerHTML = '<option value="">Seleccione un horario</option>';
+    document.getElementById('codigoDescuento').value = '';
+
+    // Se limpian los bordes de los inputs para que no aparezcan en rojo luego de confirmar la reserva y se remueva la reserva recien confirmada del localsotrage
+    document.getElementById('fecha').style.borderColor = '';
+    document.getElementById('cancha').style.borderColor = '';
+    document.getElementById('horario').style.borderColor = '';
+    document.getElementById('codigoDescuento').style.borderColor = '';
+
+    // Limpiamos el array de productos
+    productosSeleccionados = [];
+    inicializarPelotas();
+
+    // se limpian los datos temporales del localstorage
+    localStorage.removeItem('fecha');
+    localStorage.removeItem('horario');
+    localStorage.removeItem('cancha');
+
+    document.getElementById('popupResumen').style.display = 'none';
+}
