@@ -3,9 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const historialReservas = JSON.parse(localStorage.getItem('historialReservas')) || [];
 
-    if (historialReservas.length === 0) {
-        historialReservasContainer.innerHTML = '<p>No hay reservas registradas.</p>';
-        return;
+    if (historialReservas.length < 1) {
+        Toastify({
+            text: "No hay reservas registradas",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "#FF0000",
+            stopOnFocus: true,
+        }).showToast();
+         return;
     }
 
     const table = document.createElement('table');
