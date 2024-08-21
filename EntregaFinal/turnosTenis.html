@@ -60,22 +60,20 @@
                             <select class="form-select mb-3" id="cancha" required></select>
                             <select class="form-select mb-3" id="horario" required></select>
                             <input type="text" class="form-control mb-3" id="codigoDescuento"
-                                placeholder="Ingrese su código de descuento" onblur="calcularDescuento()">
+                                placeholder="Ingrese su código de descuento" >
                         </div>
                     </form>
                     <div id="productos" class="mt-3"></div>
-
-                    <button type="button" onclick="mostrarResumen()" class="btn btn-secondary mt-3">Mostrar Resumen</button>
+                    <button type="button" class="btn btn-secondary mt-3">Mostrar Resumen</button>
                     
                     <div id="popupResumen" class="popup">
                         <div class="popup-content">
                             <span class="close">&times;</span>
                             <h2>Resumen de la Reserva</h2>
                             <div id="resumenContenido"></div>
-                            <button onclick="mostrarResumen()" class="fill confirmar-btn"id="reservar">Confirmar Reserva</button>
+                            <button class="fill confirmar-btn"id="reservar">Confirmar Reserva</button>
                         </div>
                     </div> 
-
             </div>
         </div>
     </main>
