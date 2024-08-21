@@ -401,5 +401,5 @@ const resetReserva = () => {
     document.getElementById('popupResumen').style.display = 'none';
 }
 
-document.querySelector('.btn-secondary').addEventListener('click', mostrarResumen);
+document.getElementById('resumen').addEventListener('click', mostrarResumen);
 document.getElementById('reservar').addEventListener('click', confirmarReserva);
